@@ -55,7 +55,6 @@ class QuadTree:
             return True
         elif len(self.points) >= self.max_points and point.x < self.boundary[0] + self.boundary[2] and point.x >= \
                 self.boundary[0] and point.y < self.boundary[1] + self.boundary[3] and point.y >= self.boundary[1]:
-            print("SUBDIVIDE")
             self.subdivide()
 
             for pt in self.points:
@@ -78,21 +77,17 @@ import random
 
 for x in range(0, 1000):
     # p = Point(random.random() * 500, random.random() * 500)
-    pass
+    p = Point(random.gauss(width / 2, 40), random.gauss(height / 2, 40))
+    qt.insert(p)
 
 
 def setup():
     size(width, height)
     background(0)
 
-
 def draw():
-    p = Point(random.gauss(width / 2, 40), random.gauss(height / 2, 40))
-    print(p)
-    qt.insert(p)
-    qt.draw_box()
 
-    # pass
+    qt.draw_box()
 
 
 try:
