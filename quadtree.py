@@ -10,6 +10,10 @@ class Point:
         return "({}, {})".format(self.x, self.y)
 
 
+def intersects(r1, r2):
+    return not (r1[0] + r1[2] < r2[0] or r1[0] > r2[0] + r2[2] or r1[1] + r1[3] < r2[1] or r1[1] > r2[1] + r2[3])
+
+
 class QuadTree:
     def __init__(self, boundary, max_points=4):
         self.boundary = boundary  # (x1,y1,width,height)
@@ -40,6 +44,29 @@ class QuadTree:
         if self.children[0] is not None:
             for child in self.children:
                 child.draw_box()
+
+    def query(self, region):
+        points = []
+        if not intersects(region, self.boundary):
+            return points
+        elif self.children[0] is None:
+            for pt in self.points:
+                if pt.x <= region[0] + region[2] and \
+                        pt.y <= region[1] + region[3]:
+                    points.extend(pt)
+        else:
+            for child in self.children:
+                points.extend(child.query(region))
+        return points
+
+    def get_all_pts(self):
+        if self.children[0] is None:
+            return self.points
+        else:
+            points = []
+            for child in self.children:
+                points.extend(child.get_all_pts())
+            return points
 
     def insert(self, point: Point):
         if len(self.points) < self.max_points and point.x < self.boundary[0] + self.boundary[2] and point.x >= \
@@ -80,13 +107,18 @@ for x in range(0, 1000):
     p = Point(random.gauss(width / 2, 40), random.gauss(height / 2, 40))
     qt.insert(p)
 
+q = qt.query([0, 0, 250, 250])
+
+print([str(pt) + "\n" for pt in q])
+print(len(q))
+
 
 def setup():
     size(width, height)
     background(0)
 
-def draw():
 
+def draw():
     qt.draw_box()
 
 
