@@ -1,10 +1,10 @@
 # **Hydra View**
 
-###### _ A PhillyCodeFest2018 Project _
+######  A PhillyCodeFest2018 Project
 
-#### _ Built With _
-* _ Python  _
-* _ SASS _
+####  Built With
+*  Python  
+*  SASS
 
 
 ## Contributors:
@@ -29,15 +29,15 @@ Get the most accurate information to responders. Create an application that asks
 In the United States, there are various cities that provide open source data on the location of fire hydrants on streets. Such cities are Jacksonville, FL, Boulder, CO, and Providence, RI. These sources of data are valuable and critical for first responders in the event that the fire hydrants are needed for emergencies. But, not only are these locations useful for emergencies, but city water departments also benefit from the data in order to properly maintain the hydrants and the pipes surrounding the location to prevent bursts.
 Upon researching these existing systems, we decided to focus on Providence, RI. The data was most recently updated on February 25, 2016, and the data set seemed sufficient to work with. You can find the data in which we will be talking about [here.]("https://data.providenceri.gov/Neighborhoods/Map-view-of-Providence-Fire-Hydrants/pna5-29w9/data")
 The data set had 9 categories:
-    • Hydrant ID
-    • Address Key
-    • Municipality
-    • Location Description
-    • Street Name
-    • Suffix
-    • City
-    • Plan Sheet
-    • Location
+* Hydrant ID
+* Address Key
+* Municipality
+* Location Description
+* Street Name
+* Suffix
+* City
+* Plan Sheet
+* Location
 
 Using this data and their open portal, the city of Providence provided an interactive map with unique dots to show where fire hydrants are located. Each unique location could be searched, filtered, and visualized with different view controllers. In a city with a population of roughly 113,000, there are 3,224 fire hydrants (as of the recent metadata update in 2016) mapped in the dataset.
 
