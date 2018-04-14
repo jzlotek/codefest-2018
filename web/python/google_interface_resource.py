@@ -1,6 +1,6 @@
 import requests
 import json
-from quadtree import Point
+from web.python.quadtree import Point
 
 config = json.load(open("api.json", 'r'))
 
