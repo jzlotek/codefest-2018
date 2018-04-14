@@ -1,6 +1,6 @@
-#!/usr/bin/env python
+#!/usr/bin/env hydraview
 """
-Very simple HTTP server in python.
+Very simple HTTP server in hydraview.
 Usage::
     ./dummy-web-server.py [<port>]
 Send a GET request::

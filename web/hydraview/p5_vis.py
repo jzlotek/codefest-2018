@@ -1,7 +1,7 @@
 from p5 import size, background, no_fill, run, stroke, rect, fill, ellipse
-from web.python.quadtree import QuadTree, Point
+from web.hydraview.quadtree import QuadTree, Point
 import random
-from web.python import csv_parser
+from web.hydraview import csv_parser
 
 
 def draw_box(qt):
