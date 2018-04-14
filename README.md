@@ -1,10 +1,15 @@
-# **Hydra View**
+# **HydraView**
 
 ######  A PhillyCodeFest2018 Project
 
 ####  Built With
-*  Python  
-*  SASS
+* Python  
+* SASS
+* HTML5
+* Google Maps Geo-Coding API
+* Docker
+* Amazon Web Services
+* Apache Cassandra (Data Stax Enterprise)
 
 
 ## Contributors:
@@ -17,8 +22,6 @@
 
 ### Elevator Pitch
 > In the event of an emergency, HydraView provides first responders with the location of the nearest fire hyrdant.
-
-***
 
 ### Challenge
 
@@ -45,7 +48,7 @@ Using this data and their open portal, the city of Providence provided an intera
 
 ### Business Case
 
-To solve this presented challenge, we need a similar model like Providence and the other U.S. cities. However, it turns out that there exists no dataset on the fire hydrants located in the city of Philadelphia. (or, if it does exist, it isn’t easily available). Therefore, we need some method of obtaining reliable information to effectively populate a dataset first before we can make our application. We could have the Philadelphia Water Department pull up any locational data that they may have on the hydrants and the condition that they are in. However, this method may be too time-consuming for technicians to go through the thousands, possibly even ten thousands of fire hydrants. We could have each fire station in each neighborhood go to each hydrant and collect the data, but, like the water department, they have emergencies and other duties to perform.
+To solve this presented challenge, we need a similar model like Providence and the other U.S. cities. However, it turns out that there exists no dataset on the fire hydrants located in the city of Philadelphia. (or, if it does exist, it isn’t easily available). Therefore, we need some method of obtaining reliable information to effectively populate a dataset first before we can make our application. We could have the Philadelphia Water Department pull up any locational data that they may have on the hydrants and the condition that they are in. However, this method may be too time-consuming for technicians to go through the thousands of fire hydrants. We could have each fire station in each neighborhood go to each hydrant and collect the data, but, like the water department, they have emergencies and other duties to perform.
 Instead, we propose that the Philadelphia Parking Authority retrieve our data for us. Here is our pitch: agents for the parking authority walk down street blocks throughout the day. If we present them with a mobile application that has entry fields for each fire hydrant, they should be able to reliably popular a good 80% of the fire hydrants in the city.  Why the 80%? Well, we have to account for the fact that some streets aren’t covered by the PPA and some fire hydrant locations necessarily may not be on a street; they may be in a public/commercial plaza or in a drive within a business complex. However, once we obtain a bulk of the data, then we can rely on the PWD (water department) or the PFD (fire department) to provide us with the data for the remaining points. This way, we can gather tens of thousands of data points relatively quickly without heavy time or material costs, and then finish our data collection without significant cost to the departments’ efficiency.
 
 ***
