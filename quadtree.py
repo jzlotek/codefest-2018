@@ -33,7 +33,7 @@ class QuadTree:
     def draw_box(self):
         no_fill()
         stroke(255, 0, 0)
-        rect((self.boundary[0], self.boundary[1] + self.boundary[3]), self.boundary[2], self.boundary[3])
+        rect((self.boundary[0], self.boundary[1] ), self.boundary[2], self.boundary[3])
 
         fill(0, 255, 0)
         stroke(0, 255, 0)
@@ -49,14 +49,15 @@ class QuadTree:
         points = []
         if not intersects(region, self.boundary):
             return points
-        elif self.children[0] is None:
+        elif self.children[0] is None and len(self.points) is not 0:
             for pt in self.points:
                 if pt.x <= region[0] + region[2] and \
                         pt.y <= region[1] + region[3]:
-                    points.extend(pt)
+                    points.append(pt)
         else:
-            for child in self.children:
-                points.extend(child.query(region))
+            if self.children[0] is not None:
+                for child in self.children:
+                    points.extend(child.query(region))
         return points
 
     def get_all_pts(self):
@@ -101,25 +102,36 @@ height, width = 800, 800
 qt = QuadTree([0, 0, width, height])
 
 import random
+import csv_parser
+
 
 for x in range(0, 1000):
-    # p = Point(random.random() * 500, random.random() * 500)
-    p = Point(random.gauss(width / 2, 40), random.gauss(height / 2, 40))
+    # p = Point(random.random() * 500, random.random() * 500
+    p = Point(random.gauss(width / 2, 80), random.gauss(height / 2, 80))
     qt.insert(p)
 
-q = qt.query([0, 0, 250, 250])
+search = [random.random()*width, random.random()*height, 100, 100]
+q = qt.query(search)
 
-print([str(pt) + "\n" for pt in q])
+print([str(pt) for pt in q])
 print(len(q))
 
 
 def setup():
-    size(width, height)
+    size(800,800)
     background(0)
 
 
 def draw():
     qt.draw_box()
+    no_fill()
+    stroke(0,0,255)
+    rect([search[0],search[1]],search[2],search[3])
+
+x = csv_parser.get_info()
+
+for pt in x[1:]:
+    qt.insert(Point(pt['LONG'], pt['LAT']))
 
 
 try:
