@@ -1,0 +1,123 @@
+@import color
+@import url('https://fonts.googleapis.com/css?family=Open+Sans')
+@import url('https://fonts.googleapis.com/css?family=Raleway')
+
+*
+    box-sizing: border-box
+
+.row::after
+    content: ""
+    clear: both
+    display: block
+
+[class*="col-"]
+    float: left
+    padding: 15px
+
+html
+    font-family: "Raleway", sans-serif
+
+.header h1
+    background-color: $header
+    color: $black
+    padding: 50px
+    text-align: center
+    position: relative
+    margin: auto
+    opacity: 0.95
+
+.menu ul
+    list-style-type: none
+    padding: 0
+    position: relative
+    margin: auto
+
+.menu li
+    padding: 40px
+    text-align: center
+    margin-bottom: 7px
+    background-color: $page3
+    color: $black
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+    opacity: .9
+
+.menu li:hover
+    background-color: $page3-hover
+    cursor: pointer
+
+.aside
+    background-color: $page2
+    padding: 15px
+    color: $white
+    text-align: center
+    font-size: 14px
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+    position: relative
+    margin: auto
+    opacity: 0.85
+
+.footer
+    background-color: $footer
+    color: $footer-text
+    text-align: center
+    font-size: 16px
+    padding: 15px
+
+.footer p1
+    color: $footer-text
+    font-size: 10px
+
+.parallax
+    /* Full height */
+    height: 100vh
+
+    display: flex
+    align-items: center
+    margin: 0 auto
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed
+    background-position: center
+    background-repeat: no-repeat
+    background-size: cover
+
+.image1
+    background-image: url('resources/1.jpg')
+
+.image2
+    background-image: url('resources/2.jpg')
+
+.image3
+    background-image: url('resources/3.jpg')
+
+
+/* For desktop: */
+.col-1
+    width: 8.33%
+.col-2
+    width: 16.66%
+.col-3
+    width: 25%
+.col-4
+    width: 33.33%
+.col-5
+    width: 41.66%
+.col-6
+    width: 50%
+.col-7
+    width: 58.33%
+.col-8
+    width: 66.66%
+.col-9
+    width: 75%
+.col-10
+    width: 83.33%
+.col-11
+    width: 91.66%
+.col-12
+    width: 100%
+
+@media only screen and (max-width: 768px)
+    /* For mobile phones: */
+    [class*="col-"]
+        width: 100%
