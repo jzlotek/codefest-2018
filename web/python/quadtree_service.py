@@ -1,4 +1,4 @@
-from web.python.quadtree import QuadTree, Point, calculate_boundaries
+from quadtree import QuadTree, Point, calculate_boundaries
 import json
 
 

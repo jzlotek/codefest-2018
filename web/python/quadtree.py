@@ -84,10 +84,10 @@ class QuadTree:
 
     def contains(self, point):
         p1, p2, p3, p4 = self.boundary
-        # print(point.lng >= p1)
-        # print(point.lng <= p1 + p3)
-        # print(point.lat <= p2)
-        # print(point.lng >= p2 - p4)
+        #print(point.lng >= p1)
+        #print(point.lng <= p1 + p3)
+        #print(point.lat <= p2)
+        #print(point.lat >= p2 - p4)
         return point.lng >= p1 and point.lng <= p1 + p3 and point.lat <= p2 and point.lat >= p2 - p4
 
     def insert(self, point: Point):
