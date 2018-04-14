@@ -1,5 +1,25 @@
 import json
 
+const_range = 0
+
+
+def calculate_boundaries(points: list):
+    lng, lat, w, h = points[0].lng, points[0].lat, points[0].lng, points[0].lat
+
+    for pt in points[1:]:
+        # print(pt)
+        if pt.lng < lng:
+            lng = pt.lng - const_range
+        elif w < pt.lng:
+            w = pt.lng + const_range
+
+        if pt.lat < lat:
+            lat = pt.lat - const_range
+        elif h < pt.lat:
+            h = pt.lat + const_range
+
+    return [lng, h, abs(w - lng), abs(h - lat)]
+
 
 class Point:
     def __init__(self, lat, lng, OutOfService, Critical, CriticalNotes):
@@ -10,7 +30,7 @@ class Point:
         self.CriticalNotes = str(CriticalNotes)
 
     def __str__(self):
-        return "({}, {})".format(self.lat, self.lng)
+        return "({}, {})".format(self.lng, self.lat)
 
     def __eq__(self, other):
         return self.lat == other.lat and self.lng == other.lng and self.OutOfService == other.OutOfService and self.Critical == other.Critical and self.CriticalNotes == other.CriticalNotes
@@ -26,6 +46,7 @@ class QuadTree:
         self.children = [None, None, None, None]  # UL, UR, LL, LR
         self.points = []
         self.max_points = max_points
+        # print(boundary)
 
     def subdivide(self):  # recursively splits the qt into 4 children
         half_width = self.boundary[2] / 2
@@ -61,36 +82,21 @@ class QuadTree:
                 points.extend(child.get_all_pts())
             return points
 
-    def remove(self, pt):
-        all_pts = self.get_all_pts()
+    def contains(self, point):
+        p1, p2, p3, p4 = self.boundary
+        # print(point.lng >= p1)
+        # print(point.lng <= p1 + p3)
+        # print(point.lat <= p2)
+        # print(point.lng >= p2 - p4)
+        return point.lng >= p1 and point.lng <= p1 + p3 and point.lat <= p2 and point.lat >= p2 - p4
 
-        try:
-            all_pts.remove(pt)
-            return self.build_tree(all_pts)
-        except ValueError:
-            return self
+    def insert(self, point: Point):
+        # tries to insert into qt, if there are too manu points in the quad, splits and tries inserting recursively
+        print(len(self.points) < self.max_points and self.contains(point))
+        print(len(self.points) >= self.max_points and self.contains(point))
+        print()
 
-    def build_tree(self, inputs, boundary=None):
-        points = []
-        if isinstance(inputs, str):
-            j = json.loads(inputs.replace('\'', '"'))
-            for pt in j:
-                points.append(
-                    Point(pt['lat'], pt['lng'], pt['OutOfService'], pt['Critical'], pt['CriticalNotes']))
-        else:
-            for pt in inputs:
-                points.append(Point(pt.lat, pt.lng, pt.OutOfService, pt.Critical, pt.CriticalNotes))
-        qt = QuadTree(self.boundary)
-
-        for pt in points:
-            qt.insert(pt)
-
-        return qt
-
-    def insert(self,
-               point: Point):  # tries to insert into qt, if there are too manu points in the quad, splits and tries inserting recursively
-        if len(self.points) < self.max_points and point.lat < self.boundary[0] + self.boundary[2] and point.lat >= \
-                self.boundary[0] and point.lng < self.boundary[1] + self.boundary[3] and point.lng >= self.boundary[1]:
+        if len(self.points) < self.max_points and self.contains(point):
             if self.children[0] is None:
                 self.points.append(point)
             else:
@@ -98,8 +104,7 @@ class QuadTree:
                     if child.insert(point):
                         break
             return True
-        elif len(self.points) >= self.max_points and point.lat < self.boundary[0] + self.boundary[2] and point.lat >= \
-                self.boundary[0] and point.lng < self.boundary[1] + self.boundary[3] and point.lng >= self.boundary[1]:
+        elif len(self.points) >= self.max_points and self.contains(point):
             self.subdivide()
 
             for pt in self.points:
