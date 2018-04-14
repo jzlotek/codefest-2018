@@ -1,7 +1,7 @@
-from flask import Flask, request, send_from_directory, send_file, url_for,render_template
+from flask import Flask, request, send_from_directory, render_template, send_file, url_for, redirect
 import json
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 
 
 @app.route("/test")
@@ -10,5 +10,14 @@ def my_webservice():
 
 
 @app.route('/')
-def index():
-    return render_template('index.html')
+def ind():
+    return redirect('/index.html')
+
+
+@app.route('/<path:path>')
+def index(path):
+    return url_for('', path)
+
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000, debug=True)
