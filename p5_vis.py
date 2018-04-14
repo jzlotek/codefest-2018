@@ -26,7 +26,7 @@ if __name__ == '__main__':
 
     for x in range(0, 1000):
         # p = Point(random.random() * 500, random.random() * 500
-        p = Point(random.gauss(width / 2, 80), random.gauss(height / 2, 80))
+        p = Point(random.gauss(width / 2, 80), random.gauss(height / 2, 80), False, False, None)
         qt.insert(p)
 
     search = [random.random() * width, random.random() * height, 100, 100]
@@ -51,7 +51,7 @@ if __name__ == '__main__':
     x = csv_parser.get_info()
 
     for pt in x[1:]:
-        qt.insert(Point(pt['LONG'], pt['LAT']))
+        qt.insert(Point(pt['LONG'], pt['LAT'], False, False, None))
 
     try:
         run()
