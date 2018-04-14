@@ -1,41 +1,55 @@
-import urllib2
-content = urllib2.urlopen(some_url).read()
-print content
+#!/usr/bin/env python
+"""
+Very simple HTTP server in python.
+Usage::
+    ./dummy-web-server.py [<port>]
+Send a GET request::
+    curl http://localhost
+Send a HEAD request::
+    curl -I http://localhost
+Send a POST request::
+    curl -d "foo=bar&bin=baz" http://localhost
+"""
+"""
+google.com/maps?adress=SOmething+Street+fjfhjf
+{
+location:99.99,4343
 
-import httplib
-conn = httplib.HTTPConnection("www.python.org")
-conn.request("HEAD","/index.html")
-res = conn.getresponse()
-print res.status, res.reason
-# Result:
-200 OK
+}
+"""
+from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
+import SocketServer
 
-import requests
-r = requests.get('https://api.github.com/user', auth=('user', 'pass'))
-r.status_code
-# Result:
-200
+class S(BaseHTTPRequestHandler):
+    def _set_headers(self):
+        self.send_response(200)
+        self.send_header('Content-type', 'text/html')
+        self.end_headers()
 
+    def do_GET(self):
+        self._set_headers()
+        self.wfile.write("<html><body><h1>hi!</h1></body></html>")
 
-## What a POST and GET Function Coud Look Like ##
+    def do_HEAD(self):
+        self._set_headers()
 
-import requests
-url = 'https://...'
-payload = {'key1': 'value1', 'key2': 'value2'}
+    def do_POST(self):
+        # Doesn't do anything with posted data
+        content_length = int(self.headers['Content-Length']) # <--- Gets the size of data
+        post_data = self.rfile.read(content_length) # <--- Gets the data itself
+        self._set_headers()
+        self.wfile.write("<html><body><h1>POST!</h1></body></html>")
 
-# GET
-r = requests.get(url)
+def run(server_class=HTTPServer, handler_class=S, port=80):
+    server_address = ('', port)
+    httpd = server_class(server_address, handler_class)
+    print 'Starting httpd...'
+    httpd.serve_forever()
 
-# GET with params in URL
-r = requests.get(url, params=payload)
+if __name__ == "__main__":
+    from sys import argv
 
-# POST with form-encoded data
-r = requests.post(url, data=payload)
-
-# POST with JSON
-import json
-r = requests.post(url, data=json.dumps(payload))
-
-# Response, status etc
-r.text
-r.status_code
+    if len(argv) == 2:
+        run(port=int(argv[1]))
+    else:
+        run()
