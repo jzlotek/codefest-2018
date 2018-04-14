@@ -50,6 +50,7 @@ Using this data and their open portal, the city of Providence provides an intera
 ### Business Case
 
 To solve this presented challenge, we need a similar model like Providence and the other U.S. cities. However, it turns out that there exists no similar dataset on the fire hydrants located in the city of Philadelphia that is open source online. In this competition, we were provided a json file containing all the data points; each data point has the respective categories:
+
 * Lat
 * Lng
 * OutOfService
