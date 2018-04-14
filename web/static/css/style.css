@@ -17,8 +17,11 @@ html {
 
 .header h1 {
   background-color: #fd7829;
-  color: black;
+  color: white;
+  border: solid;
+  border-color: white;
   padding: 50px;
+  font-size: 54px;
   text-align: center;
   position: relative;
   margin: auto;
@@ -64,18 +67,6 @@ html {
 .footer p1 {
   color: #fafafa;
   font-size: 10px; }
-
-.parallax {
-  /* Full height */
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  margin: 0 auto;
-  /* Create the parallax scrolling effect */
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover; }
 
 .image1 {
   background-image: url("resources/1.jpg"); }
@@ -126,6 +117,26 @@ html {
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
   [class*="col-"] {
-    width: 100%; } }
+    width: 100%; }
+
+  .parallax {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    background-attachment: none;
+    background-position: center;
+    background-repeat: none;
+    background-size: cover; } }
+@media only screen and (min-width: 769px) {
+  .parallax {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; } }
 
 /*# sourceMappingURL=style.css.map */
