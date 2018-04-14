@@ -1,43 +1,59 @@
-from p5 import *
+from p5 import setup, draw, size, background, no_fill, run, stroke, rect, fill, ellipse
 from quadtree import QuadTree, Point
-
-height, width = 800, 800
-qt = QuadTree([0, 0, width, height])
-
 import random
 import csv_parser
 
 
-for x in range(0, 1000):
-    # p = Point(random.random() * 500, random.random() * 500
-    p = Point(random.gauss(width / 2, 80), random.gauss(height / 2, 80))
-    qt.insert(p)
-
-search = [random.random()*width, random.random()*height, 100, 100]
-q = qt.query(search)
-
-print([str(pt) for pt in q])
-print(len(q))
-
-
-def setup():
-    size(800,800)
-    background(0)
-
-
-def draw():
-    qt.draw_box()
+def draw_box(qt):
     no_fill()
-    stroke(0,0,255)
-    rect([search[0],search[1]],search[2],search[3])
+    stroke(255, 0, 0)
+    rect((qt.boundary[0], qt.boundary[1]), qt.boundary[2], qt.boundary[3])
 
-x = csv_parser.get_info()
+    fill(0, 255, 0)
+    stroke(0, 255, 0)
+    if len(qt.points) > 0:
+        for pt in qt.points:
+            ellipse([pt.x, pt.y], 1, 1)
 
-for pt in x[1:]:
-    qt.insert(Point(pt['LONG'], pt['LAT']))
+    if qt.children[0] is not None:
+        for child in qt.children:
+            draw_box(child)
 
 
-try:
-    run()
-except:
-    pass
+if __name__ == '__main__':
+    height, width = 800, 800
+    qt = QuadTree([0, 0, width, height])
+
+    for x in range(0, 1000):
+        # p = Point(random.random() * 500, random.random() * 500
+        p = Point(random.gauss(width / 2, 80), random.gauss(height / 2, 80))
+        qt.insert(p)
+
+    search = [random.random() * width, random.random() * height, 100, 100]
+    q = qt.query(search)
+
+    print([str(pt) for pt in q])
+    print(len(q))
+
+
+    def setup():
+        size(800, 800)
+        background(0)
+
+
+    def draw():
+        draw_box(qt)
+        no_fill()
+        stroke(0, 0, 255)
+        rect([search[0], search[1]], search[2], search[3])
+
+
+    x = csv_parser.get_info()
+
+    for pt in x[1:]:
+        qt.insert(Point(pt['LONG'], pt['LAT']))
+
+    try:
+        run()
+    except:
+        pass
