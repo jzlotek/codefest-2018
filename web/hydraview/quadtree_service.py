@@ -44,9 +44,19 @@ def remove_from_tree(qt: QuadTree, pt: Point):
         return qt
 
 
+from math import sin, cos, sqrt, atan2, radians
+
+
 def get_closest_to_point(hydrant_locations, point: Point, max_num=5):
-    sorted_list = sorted(hydrant_locations, key=lambda pt: (point.lat - pt.lat) ** 2 + (point.lng - pt.lng) ** 2,
+    sorted_list = sorted(hydrant_locations, key=lambda p: 2 * atan2(
+        sqrt(sin(radians(point.lat) - p.lat / 2) ** 2 + cos(p.lat) * cos(radians(point.lat)) * sin(
+            radians(point.lng) - p.lng / 2) ** 2),
+        sqrt(1 - sin(radians(point.lat) - p.lat / 2) ** 2 + cos(p.lat) * cos(radians(point.lat)) * sin(
+            radians(point.lng) - p.lng / 2) ** 2)) * 6373.0,
                          reverse=False)
+
+    # sorted_list = sorted(hydrant_locations, key=lambda p: (point.lat - p.lat) ** 2 + (point.lng - p.lng) ** 2,
+    #                      reverse=False)
 
     # print((point.lat - sorted_list[0].lat) ** 2 + (point.lng - sorted_list[0].lng) ** 2)
     # print((point.lat - sorted_list[1].lat) ** 2 + (point.lng - sorted_list[1].lng) ** 2)
