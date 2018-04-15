@@ -75,6 +75,8 @@
 
   function makeMap(location) {
 
+    document.getElementById('mapWrapper').style.display = 'block';
+
     map = new google.maps.Map(document.getElementById('map'), {
       zoom: 17,
       center: location
@@ -132,6 +134,8 @@
 
   function goToTop() {
     window.location.hash = "top";
+
+    document.getElementById('mapWrapper').style.display = 'none';
 
   }
 </script>
