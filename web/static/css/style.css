@@ -81,7 +81,7 @@ input {
   input::-webkit-input-placeholder {
     color: #FB8C00;
     font-size: 11px;
-    transform: translateY(-20px);
+    transform: translateY(-2.2em);
     visibility: visible !important; }
 
 button {
@@ -144,7 +144,7 @@ button {
 
 #map {
   height: 85%;
-  width: 100%; }
+  width: 90%; }
 
 .footer {
   background-color: #37474f;
