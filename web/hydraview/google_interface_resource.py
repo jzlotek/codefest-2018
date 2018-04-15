@@ -1,14 +1,15 @@
 import requests
 import json
-from web.hydraview.quadtree import Point
+from quadtree import Point
 
-config = json.load(open("api.json", 'r'))
+config = json.load(open("./api.json", 'r'))
 
 
-def get_gps_location():
+def get_gps_location(path):
     r = requests.get(
-        'https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key={}'.format(
-            config.get('google_maps_geocoding')))
+        'https://maps.googleapis.com/maps/api/geocode/json?address={}&key={}'.format(path,
+                                                                                     config.get(
+                                                                                         'google_maps_geocoding')))
     s = str(r.json()).replace('\'', '"')
     j = json.loads(s)
 
@@ -19,12 +20,16 @@ def get_gps_location():
     for res in j.get('results'):
         coords.append(res.get('geometry').get('location'))
 
+    print(coords)
+
     points = []
     for c in coords:
-        points.append(Point(c.get('lng'), c.get('lat')))
+        points.append(Point(c.get('lng'), c.get('lat'), False, False, None))
 
     return points
 
 
-points = get_gps_location()
-print([str(pt) for pt in points])
+if __name__ == "__main__":
+    pass
+    # points = get_gps_location()
+    # print([str(pt) for pt in points])

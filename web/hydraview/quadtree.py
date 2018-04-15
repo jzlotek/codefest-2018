@@ -2,6 +2,11 @@ import json
 
 const_range = 0
 
+class Serializable:
+    def toJSON(self):
+        return json.dumps(self, default=lambda o: o.__dict__,
+                          sort_keys=True, indent=4)
+
 
 def calculate_boundaries(points: list):
     lng, lat, w, h = points[0].lng, points[0].lat, points[0].lng, points[0].lat
@@ -21,7 +26,7 @@ def calculate_boundaries(points: list):
     return [lng, h, abs(w - lng), abs(h - lat)]
 
 
-class Point:
+class Point(Serializable):
     def __init__(self, lat, lng, OutOfService, Critical, CriticalNotes):
         self.lat = float(lat)
         self.lng = float(lng)
@@ -40,7 +45,7 @@ def intersects(r1, r2):
     return not (r1[0] + r1[2] < r2[0] or r1[0] > r2[0] + r2[2] or r1[1] + r1[3] < r2[1] or r1[1] > r2[1] + r2[3])
 
 
-class QuadTree:
+class QuadTree(Serializable):
     def __init__(self, boundary, max_points=4):
         self.boundary = boundary  # (lng,lat,lng_lim,lat_lim)
         self.children = [None, None, None, None]  # UL, UR, LL, LR

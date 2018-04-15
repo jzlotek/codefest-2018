@@ -37,18 +37,19 @@ def remove_from_tree(qt: QuadTree, pt: Point):
         return qt
 
 
-string = ""
-with open('hydrants.json', 'r') as file:
-    for line in file:
-        string += line
+if __name__ == "__main__":
+    string = ""
+    with open('hydrants.json', 'r') as file:
+        for line in file:
+            string += line
 
-tree = build_tree(string)
+    tree = build_tree(string)
 
-print(len(tree.get_all_pts()))
+    print(len(tree.get_all_pts()))
 
-tree = remove_from_tree(tree, Point(39.883289, -75.052684, False, False, None))
+    tree = remove_from_tree(tree, Point(39.883289, -75.052684, False, False, None))
 
-print(len(tree.get_all_pts()))
+    print(len(tree.get_all_pts()))
 
-# for pt in tree.get_all_pts():
-#     print(str(pt))
+    # for pt in tree.get_all_pts():
+    #     print(str(pt))
