@@ -1,6 +1,7 @@
 from quadtree import QuadTree, Point, calculate_boundaries
-import json
 from math import sin, cos, sqrt, atan2, radians
+
+import json
 import requests
 
 url = 'https://maps.googleapis.com/maps/api/geocode/json'
@@ -16,11 +17,28 @@ lat1 = (location['lng'])
 R = 6373.0
 length_list = []
 
+#{"lat":39.8852,"lng":-75.064254,"OutOfService":false,"Critical":false,"CriticalNotes":null}
 string = ""
 with open('hydrants.json', 'r') as file:
     for line in file:
         string += line
-print(string.points)
+points = []
+inputs = string
+if isinstance(inputs, str):
+    j = json.loads(inputs.replace('\'', '"'))
+    for pt in j:
+        points.append(
+            Point(pt['lat'], pt['lng'],False,False,None))
+else:
+    for pt in inputs:
+        points.append(Point(pt.lat, pt.lng,False,False,None))
+
+data = []
+for i in range(0,2499):
+    data.append(str(points[i]))
+    data[i].partition('(')[0].rpartition(','])[1]
+
+print(data)
 
 lat2 = radians(52.406374)
 lon2 = radians(16.9251681)
