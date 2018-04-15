@@ -48,17 +48,15 @@ With this data set we want to provide first responders with an application that 
 
 ### Our Approach
 
-Out web application currently persists a list of ~2500 fire hydrants in the NJ area (more about this later). When an address is input into our API, we make HTTP GET calls to our Flask server with the address of the fire as a query parameter. We return the address's decimal degree coordinates and a list of the closest, n fire hydrants to that address (another query parameter).
+Out web application currently takes the given data set which persists of ~2500 fire hydrants in the NJ area. The user is asked for the address of the fire when an address is inputted into our API, we make HTTP GET calls to our Flask server with the address of the fire as a query parameter. We return the address's decimal degree coordinates and a list of the closest, n fire hydrants to that address (another query parameter).
 
+An example query:
 http://url.com/getClosestHydrants?address=Address&num=X
 Address is the address, X is the number of hydrants to find
 
+A map will then be displayed for the user with fire hydrant pins that user can select. 
+
 Future improvements include implementing a quad tree as a way of storing data. This would allow the application to scale and still have quick lookups regardless of the data size.
-
-
-Taking what exists in Providence, RI, and with our business case in mind, we want to model our application to effectively solve the challenge. However, Philadelphia, with a population of roughly 1.2 million, is bound to have drastically more fire hydrants. Therefore, we need to change how we store and manipulate the data. We still want to add various categories if time permits for our mobile application collection such as street, detailed location description, and hydrant id.
-The data set itself must be larger as well. Instead of just storing all the data into a hashmap table, we want to use a data type called a quadtree. This allows for us to quickly and effectively store a bulk set of data and quickly retrieve a set of fire hydrants for a given input location. Here’s briefly how it will work:
-Our application, for the purposes of this competition, will be modeled using the given dataset from American Water. However, as stated in our business case, we suggest that a much more detailed dataset be created, similar to what is established in Providence. We will take the JSON data and map it to a created quadtree. Then, our application will allow users to input their current location, or for the sake of having the flexibility, any given location, because we want users to also sit at the office and view conditions of any given fire hydrants. Then, the application will search through our dataset and return the unique object (or closest object) and some other points around it for a given radius. We think that this approach will prove very suitable as a solution to this challenge.
 
 ***
 
