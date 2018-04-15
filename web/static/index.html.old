@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <link rel="stylesheet" type="text/css" href="css/style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<div class="parallax header" id="top">
+  <h1><img src="css/resources/hydra.png" width="150em"></br>HydraView</h1>
+</div>
+
+<div class="row">
+
+<div class="parallax col-12 image2">
+  <div class="aside">
+    <h2>What?</h2
+    <p>HydraView finds the nearest fire hydrants to your location.</p>
+    <h2>How?</h2>
+    <p>Using your location and our dataset.</p>
+    <h2>Why?</h2>
+    <p>In the event of an emergency, HydraView provides first responders with the location of the nearest fire hydrant.</p>
+  </div>
+</div>
+
+<div class="parallax col-12 menu image1">
+  <ul>
+    <li>Find Hydrants Near me</li>
+      <li>TODO: ADD DA MAP</li>
+  </ul>
+</div>
+
+</div>
+
+<div class="footer">
+  <p>Developed for PhillyCodeFest2018</p>
+  <p1>All images used under CC0 Creative Commons License.</br>
+  Logo made by Freepik from www.flaticon.com.</p1>
+</div>
+
+</body>
+</html>
