@@ -1,54 +1,72 @@
 <!DOCTYPE html>
 <html>
 
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <style>
+    #map {
+      height: 400px;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <h3>My Google Maps Demo</h3>
+  <div id="map"></div>
+</body>
+
 <script>
+  var map;
+
   function initMap() {
     var uluru = {
       lat: 39.965372,
       lng: -75.00
     };
 
-    var map = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getElementById('map'), {
       zoom: 12,
       center: uluru
     });
+
     var marker = new google.maps.Marker({
       position: uluru,
       map: map
     });
 
+    getLocations();
+
   }
 
   function getLocations() {
 
-    $.getJSON("http://l10.250.9.25/getAllHydrants", function(json) {
+    $.getJSON("http://10.250.9.25/getAllHydrants", function(json) {
 
-      var location;
+      $.each(json, function(i, item) {
+        var location = {
+          lat: item.lat - 0.0,
+          lng: item.lng - 0.0
+        };
 
-
-      $.each(json.zones, function(i, item) {
-        location = item.lat + ',' + item.lng, addMarker(location);
+        addMarker(location);
       });
 
     });
   };
 
   function addMarker(location) {
-    marker = new google.maps.Marker({
-      position: new google.maps.LatLng(location),
-      map: map,
-      icon: redImage
+    var marker = new google.maps.Marker({
+      position: location,
+      map: map
     });
+    console.log(location);
     // markersArray.push(marker);
   }
 </script>
-
-<body>
-  <h3>My Google Maps Demo</h3>
-  <div id="map"></div>
-  <!-- Replace the value of the key parameter with your own API key. -->
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNd-7SeSVw9WDXoDtIL-v9E0BfdztTO_M&callback=initMap">
-  </script>
-</body>
+<!-- Replace the value of the key parameter with your own API key. -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNd-7SeSVw9WDXoDtIL-v9E0BfdztTO_M&callback=initMap">
+</script>
 
 </html>
