@@ -45,8 +45,8 @@ def my_webservice():
 def get():
     if request.args.get('address'):
         ret = hydraview.google_interface_resource.get_gps_location(request.args.get('address'))
-
-        if ret is None or len(ret) == 0:
+        print(ret)
+        if ret is None:
             return bytes('null', encoding='UTF-8')
 
         s = ret[0]
@@ -56,7 +56,7 @@ def get():
             closest = get_closest_to_point(hydrants, s)
 
         json_str = '{"address":' + s.toJSON() + ',"hydrants":' + jsonify(closest) + '}'
-
+        print(json_str)
         return bytes(json_str, encoding='UTF-8')
     else:
         return bytes('[]', encoding='UTF-8')

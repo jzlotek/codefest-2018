@@ -10,7 +10,8 @@ def get_gps_location(path):
         'https://maps.googleapis.com/maps/api/geocode/json?address={}&key={}'.format(path,
                                                                                      config.get(
                                                                                          'google_maps_geocoding')))
-    if r.json() is None or len(r.json()):
+    print(r.json())
+    if r.json() is None or len(json.dumps(r.json())) == 0:
         return None
 
     s = str(r.json()).replace('\'', '"')
