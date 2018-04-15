@@ -3,7 +3,11 @@
 
 <head>
   <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
 </head>
 
 <body>
@@ -12,24 +16,26 @@
     <h1><img src="css/resources/hydra.png" width="150em"></br>HydraView</h1>
   </div>
 
-  <div class="row" id="map">
-    <br/>
-    <div class="col-12 help">
-      <div class="in">
-        <input type="text" id="uname" name="name" placeholder="Enter an address to find the nearest hydrants...">
-        <button>Submit</button>
-      </div>
-
-      <div>
-      </div>
+  <div class="row">
+    <div class="col-12 pageWrapper" id="in">
+      <form>
+        <h1>Find the Nearest Fire Hydrants</h1>
+        <input placeholder="Address" type="text" required="" id="address">
+        <input placeholder="City, State" type="text" required="" id="cityState">
+        <button class="follow" onClick="initMap()"><i class="fa fa-search"></i>Submit</button>
+      </form>
     </div>
 
-    <div class="col-12 mapWrapper">
-      <p> MAP </p>
+    <div class="col-12 pageWrapper mapper" id="mapWrapper">
+      <div id="map"></div>
     </div>
-  </div>
+
+    <div class="col-12 pageWrapper" id="about">
+      <p> About </p>
+    </div>
 
   </div>
+
   <div class="footer" id="footer">
     <p>Developed for PhillyCodeFest2018</p>
     <p1>All images used under CC0 Creative Commons License.</br>
@@ -37,5 +43,109 @@
   </div>
 
 </body>
+
+<script>
+  var ip = "ec2-52-207-219-213.compute-1.amazonaws.com";
+  var fire = "css/resources/fire.png";
+  var hydrant = "css/resources/hydrant.png";
+
+  var map;
+  var searchTerm = "";
+  var json;
+
+  function addMarker(location) {
+    var marker = new google.maps.Marker({
+      position: location,
+      map: map,
+      icon: hydrant
+    });
+    console.log(location);
+    // markersArray.push(marker);
+  }
+
+
+  function makeMap(location) {
+    map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 17,
+      center: location
+    });
+
+    var marker = new google.maps.Marker({
+      position: location,
+      map: map,
+      icon: fire
+    });
+  };
+
+  function getData(address) {
+
+    $.ajax({
+      url: "http://" + ip + "/getClosestHydrants?address=" + address,
+      dataType: 'json',
+      success: function(json) {
+        var location = {
+          lat: json.address.lat,
+          lng: json.address.lng
+        };
+
+        makeMap(location);
+
+        $.each(json.hydrants, function(i, item) {
+          location = {
+            lat: item.lat - 0.0,
+            lng: item.lng - 0.0
+          };
+
+          addMarker(location);
+        });
+      },
+      error: function(json) {
+        alert("ERROR: Address not Found");
+      }
+    });
+  };
+
+  function initMap() {
+    // var uluru = {
+    //   lat: 39.965372,
+    //   lng: -75.00
+    // };
+    //
+    // map = new google.maps.Map(document.getElementById('map'), {
+    //   zoom: 12,
+    //   center: uluru
+    // });
+    //
+    // var marker = new google.maps.Marker({
+    //   position: uluru,
+    //   map: map
+    // });
+
+    searchTerm = "";
+    searchTerm += document.getElementById('address').value;
+    searchTerm += " " + document.getElementById('cityState').value;
+
+    console.log("init with term: " + searchTerm);
+    getData(searchTerm);
+  }
+
+  // function getLocations() {
+  //
+  //   $.getJSON("http://10.250.9.25/getClosestHydrants?address=" + searchTerm, function(json) {
+  //
+  //     $.each(json, function(i, item) {
+  //       var location = {
+  //         lat: item.lat - 0.0,
+  //         lng: item.lng - 0.0
+  //       };
+  //
+  //       addMarker(location);
+  //     });
+  //
+  //   });
+  // };
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNd-7SeSVw9WDXoDtIL-v9E0BfdztTO_M">
+</script>
 
 </html>

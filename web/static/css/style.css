@@ -28,9 +28,9 @@ html {
   opacity: 0.95;
   border-radius: 50px; }
 
-.mapWrapper {
-  background-color: #FFE0B2;
-  height: 120vh; }
+.pageWrapper {
+  border-style: solid;
+  height: 100vh; }
 
 .help {
   height: 100px;
@@ -41,6 +41,88 @@ html {
 .in {
   position: relative;
   margin: auto; }
+
+form {
+  box-sizing: border-box;
+  width: 260px;
+  margin: 100px auto 0;
+  box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.2);
+  padding-bottom: 20px;
+  border-radius: 3px; }
+
+h1 {
+  box-sizing: border-box;
+  padding: 20px;
+  font-size: 20px;
+  text-align: center; }
+
+input {
+  margin: 40px 25px;
+  width: 200px;
+  display: block;
+  border: none;
+  padding: 10px 0;
+  border-bottom: solid 1px #fd7829;
+  transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #fd7829 4%);
+  background-position: -200px 0;
+  background-size: 200px 100%;
+  background-repeat: no-repeat;
+  color: #be4802; }
+  input:focus, input:valid {
+    box-shadow: none;
+    outline: none;
+    background-position: 0 0; }
+  input::-webkit-input-placeholder {
+    color: #fd7829;
+    font-size: 11px;
+    transform: translateY(-20px);
+    visibility: visible !important; }
+
+button {
+  border: none;
+  background: #fd7829;
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 6px;
+  width: 200px;
+  color: white;
+  margin-left: 25px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+  align-items: center; }
+  button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2); }
+
+.follow {
+  width: 42px;
+  height: 42px;
+  border-radius: 50px;
+  background: #fd7829;
+  display: inline-block;
+  margin: 50px calc(50% - 21px);
+  white-space: nowrap;
+  padding: 13px;
+  color: white;
+  transition: all 0.2s ease;
+  font-family: Roboto, sans-serif;
+  text-decoration: none;
+  box-shadow: 0 5px 6px 0 rgba(0, 0, 0, 0.2); }
+  .follow i {
+    margin-right: 20px;
+    transition: margin-right 0.2s ease; }
+  .follow:hover {
+    width: 134px;
+    transform: translateX(-50px); }
+    .follow:hover i {
+      margin-right: 10px; }
+
+.mapper {
+  align-items: center; }
+
+#map {
+  height: 90%;
+  width: 100%; }
 
 .footer {
   background-color: #37474f;
