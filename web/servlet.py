@@ -50,8 +50,8 @@ def get():
             return bytes('null', encoding='UTF-8')
 
         s = ret[0]
-        if request.args.get('max'):
-            closest = get_closest_to_point(hydrants, s, max_num=abs(request.args.get('max')))
+        if request.args.get('num'):
+            closest = get_closest_to_point(hydrants, s, max_num=abs(request.args.get('num')))
         else:
             closest = get_closest_to_point(hydrants, s)
 
