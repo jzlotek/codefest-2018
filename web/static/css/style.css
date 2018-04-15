@@ -80,8 +80,9 @@ input {
     background-position: 0 0; }
   input::-webkit-input-placeholder {
     color: #FB8C00;
-    font-size: 2vw;
+    font-size: 11px;
     transform: translateY(-2.2em);
+    font-size: 2vw;
     visibility: visible !important; }
 
 button {
