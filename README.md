@@ -19,7 +19,7 @@
 ***
 
 ### Elevator Pitch
-> In the event of an emergency, HydraView provides first responders with the location of the nearest fire hyrdant.
+> In the event of an emergency, HydraView provides first responders with the location of the nearest fire hydrant.
 
 ### Challenge
 
