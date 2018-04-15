@@ -80,7 +80,7 @@ input {
     background-position: 0 0; }
   input::-webkit-input-placeholder {
     color: #FB8C00;
-    font-size: 11px;
+    font-size: 2vw;
     transform: translateY(-2.2em);
     visibility: visible !important; }
 
