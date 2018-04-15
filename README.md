@@ -4,12 +4,11 @@
 
 ####  Built With
 * Python  
+- Flask
 * SASS
 * HTML5
 * Google Maps Geo-Coding API
-* Docker
 * Amazon Web Services
-* Apache Cassandra (Data Stax Enterprise)
 
 
 ## Contributors:
@@ -29,27 +28,13 @@ Get the most accurate information to responders. Create an application that asks
 
 ### Existing systems
 
-In the United States, there are various cities that provide open source data on the location of fire hydrants on streets. Such cities are Jacksonville, FL, Boulder, CO, and Providence, RI. These sources of data are valuable and critical for first responders in the event that the fire hydrants are needed for emergencies. But, not only are these locations useful for emergencies, but city water departments also benefit from the data in order to properly maintain the hydrants and the pipes surrounding the location to prevent bursts. 
-Upon researching these existing systems, we decided to focus on Providence, RI. The data was most recently updated on February 25, 2016, and the data set seemed sufficient to work with. You can find the data in which we will be talking about here: https://data.providenceri.gov/Neighborhoods/Map-view-of-Providence-Fire-Hydrants/pna5-29w9/data
-The data set had 9 categories:
-
-* Hydrant ID
-* Address Key
-* Municipality
-* Location Description
-* Street Name
-* Suffix
-* City
-* Plan Sheet
-* Location
-
-Using this data and their open portal, the city of Providence provides an interactive map with unique dots to show where fire hydrants are located. Each unique location could be searched, filtered, and visualized with different view controllers. In a city with a population of roughly 113,000, there are 3,224 fire hydrants (as of the recent metadata update in 2016) mapped in the dataset. 
+American Water provided us with a JSON file that contained information about various groups of fire hydrants within New Jersey. The file gave us the latitude and longitude, wether the hydrant was operational or not, and if the hydrant needs to be upgraded.  
 
 ***
 
 ### Business Case
 
-To solve this presented challenge, we need a similar model like Providence and the other U.S. cities. However, it turns out that there exists no similar dataset on the fire hydrants located in the city of Philadelphia that is open source online. In this competition, we were provided a json file containing all the data points; each data point has the respective categories:
+In this competition, we were provided a json file containing all the data points; each data point has the respective categories:
 
 * Lat
 * Lng
@@ -57,9 +42,7 @@ To solve this presented challenge, we need a similar model like Providence and t
 * Critical
 * CriticalNotes
 
-While these data categories are great and useful for the purposes of this competition, we want to provide a much more comprehensive and long-term application similar to what Providence RI does. Therefore, we need some method of obtaining reliable information to effectively populate the remaining categories to be added to the provided dataset. We could have the Philadelphia Water Department pull up any locational data that they may have on the hydrants and the condition that they are in. However, this method may be too time-consuming for technicians to go through the thousands, possibly even ten thousands of fire hydrants. We could have each fire station in each neighborhood go to each hydrant and collect the data, but, like the water department, they have emergencies and other duties to perform.
-Instead, we propose that the Philadelphia Parking Authority retrieve our data for us. Here is our pitch: agents for the parking authority walk down street blocks throughout the day. If we present them with a mobile application that has entry fields for each fire hydrant, they should be able to reliably popular a good 80% of the fire hydrants in the city.  Why the 80%? Well, we have to account for the fact that some streets aren’t covered by the PPA and some fire hydrant locations necessarily may not be on a street; they may be in a public/commercial plaza or in a drive within a business complex. However, once we obtain a bulk of the data, then we can rely on the PWD (water department) or the PFD (fire department) to provide us with the data for the remaining points. This way, we can gather tens of thousands of data points relatively quickly to supplement the dataset provided to us by American Water.
-
+With this data set we want to provide first responders with an application that will direct them to the most optimal fire hydrant for the location that they are heading towards potentially recovering additional live saving seconds.
 
 ***
 
