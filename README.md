@@ -15,7 +15,6 @@
 * John Zlotek
 * Dakota Wessel
 * Joseph Hines
-* Matt Horger
 
 ***
 
