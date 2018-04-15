@@ -44,7 +44,12 @@ def my_webservice():
 @app.route("/getClosestHydrants")
 def get():
     if request.args.get('address'):
-        s = hydraview.google_interface_resource.get_gps_location(request.args.get('address'))[0]
+        ret = hydraview.google_interface_resource.get_gps_location(request.args.get('address'))
+
+        if len(ret) == 0:
+            return bytes('null', encoding='UTF-8')
+
+        s = ret[0]
         if request.args.get('max'):
             closest = get_closest_to_point(hydrants, s, max_num=abs(request.args.get('max')))
         else:
