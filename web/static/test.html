@@ -51,7 +51,7 @@
 
   function getLocations() {
 
-    $.getJSON("http://10.250.9.25/getAllHydrants", function(json) {
+    $.getJSON("http://localhost/getAllHydrants", function(json) {
 
       $.each(json, function(i, item) {
         var location = {

@@ -1,6 +1,5 @@
-from flask import Flask, request, send_from_directory, render_template, send_file, url_for, redirect
+from flask import Flask, request, url_for, redirect
 from flask_cors import CORS
-import json
 import hydraview.google_interface_resource
 from hydraview.quadtree_service import build_list, get_closest_to_point
 
@@ -56,7 +55,7 @@ def get():
             closest = get_closest_to_point(hydrants, s)
 
         json_str = '{"address":' + s.toJSON() + ',"hydrants":' + jsonify(closest) + '}'
-
+        print(json_str)
         return bytes(json_str, encoding='UTF-8')
     else:
         return bytes('[]', encoding='UTF-8')
