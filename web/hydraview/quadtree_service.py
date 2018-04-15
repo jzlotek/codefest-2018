@@ -54,8 +54,7 @@ def remove_from_tree(qt: QuadTree, pt: Point):
 def get_closest_to_point(hydrant_locations, point: Point, max=5):
     sorted_list = sorted(hydrant_locations, key=lambda pt: (point.lat - pt.lat) ** 2 + (point.lng - pt.lng) ** 2,
                          reverse=True)
-
-    # for p in sorted_list:
+    #for p in sorted_list:
     #     print(str(p))
 
     if len(sorted_list) < max:
@@ -63,6 +62,17 @@ def get_closest_to_point(hydrant_locations, point: Point, max=5):
     else:
         return [pt for pt in sorted_list[:max]]
 
+    closest = []
+    itr = 0
+    while len(closest < 5):
+        pt = sorted_list[itr]
+        if(pt.OutOfService):
+            itr+=1
+        else:
+            closest.append(pt)
+            itr+=1
+
+    print(closest)
 
 if __name__ == "__main__":
     p = get_closest_to_point(l, l[5])
