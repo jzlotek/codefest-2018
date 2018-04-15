@@ -34,13 +34,6 @@ def build_list(inputs):
     return points
 
 
-string = ""
-with open('hydrants.json', 'r') as file:
-    for line in file:
-        string += line
-l = build_list(string)
-
-
 def remove_from_tree(qt: QuadTree, pt: Point):
     all_pts = qt.get_all_pts()
     print(len(all_pts))
@@ -51,33 +44,37 @@ def remove_from_tree(qt: QuadTree, pt: Point):
         return qt
 
 
-def get_closest_to_point(hydrant_locations, point: Point, max=5):
+def get_closest_to_point(hydrant_locations, point: Point, max_num=5):
     sorted_list = sorted(hydrant_locations, key=lambda pt: (point.lat - pt.lat) ** 2 + (point.lng - pt.lng) ** 2,
-                         reverse=True)
-    #for p in sorted_list:
-    #     print(str(p))
+                         reverse=False)
 
-    if len(sorted_list) < max:
+    # print((point.lat - sorted_list[0].lat) ** 2 + (point.lng - sorted_list[0].lng) ** 2)
+    # print((point.lat - sorted_list[1].lat) ** 2 + (point.lng - sorted_list[1].lng) ** 2)
+    # print((point.lat - sorted_list[-2].lat) ** 2 + (point.lng - sorted_list[-2].lng) ** 2)
+    # print((point.lat - sorted_list[-1].lat) ** 2 + (point.lng - sorted_list[-1].lng) ** 2)
+
+    if len(sorted_list) < max_num:
         return sorted_list
     else:
-        return [pt for pt in sorted_list[:max]]
+        closest = []
+        itr = 0
+        while len(closest) < max_num and itr < len(sorted_list):
+            pt = sorted_list[itr]
+            if pt.OutOfService:
+                itr += 1
+            else:
+                closest.append(pt)
+                itr += 1
 
-    closest = []
-    itr = 0
-    while len(closest < 5):
-        pt = sorted_list[itr]
-        if(pt.OutOfService):
-            itr+=1
-        else:
-            closest.append(pt)
-            itr+=1
+        # print(closest)
+        return closest
 
-    print(closest)
 
 if __name__ == "__main__":
-    p = get_closest_to_point(l, l[5])
-    for pt in p:
-        print(str(pt))
+    pass
+    # p = get_closest_to_point(l, l[5])
+    # for pt in p:
+    #     print(str(pt))
     # tree = build_tree(string)
     #
     # print(len(tree.get_all_pts()))

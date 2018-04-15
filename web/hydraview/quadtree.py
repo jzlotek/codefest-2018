@@ -2,6 +2,7 @@ import json
 
 const_range = 0
 
+
 class Serializable:
     def toJSON(self):
         return json.dumps(self, default=lambda o: o.__dict__,
@@ -35,7 +36,9 @@ class Point(Serializable):
         self.CriticalNotes = str(CriticalNotes)
 
     def __str__(self):
-        return "({}, {})".format(self.lng, self.lat, self.OutOfService,self.Critical,self.)
+        return "({}, {}), OutOfService: {}, Critical: {}, CriticalNotes: {}".format(self.lng, self.lat,
+                                                                                    self.OutOfService, self.Critical,
+                                                                                    self.CriticalNotes)
 
     def __eq__(self, other):
         return self.lat == other.lat and self.lng == other.lng and self.OutOfService == other.OutOfService and self.Critical == other.Critical and self.CriticalNotes == other.CriticalNotes
@@ -89,10 +92,10 @@ class QuadTree(Serializable):
 
     def contains(self, point):
         p1, p2, p3, p4 = self.boundary
-        #print(point.lng >= p1)
-        #print(point.lng <= p1 + p3)
-        #print(point.lat <= p2)
-        #print(point.lat >= p2 - p4)
+        # print(point.lng >= p1)
+        # print(point.lng <= p1 + p3)
+        # print(point.lat <= p2)
+        # print(point.lat >= p2 - p4)
         return point.lng >= p1 and point.lng <= p1 + p3 and point.lat <= p2 and point.lat >= p2 - p4
 
     def insert(self, point: Point):

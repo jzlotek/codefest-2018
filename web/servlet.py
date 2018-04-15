@@ -1,8 +1,18 @@
 from flask import Flask, request, send_from_directory, render_template, send_file, url_for, redirect
 import json
 import hydraview.google_interface_resource
+from hydraview.quadtree_service import build_list
 
 app = Flask(__name__, static_url_path='')
+
+hydrants = []
+
+string = ""
+with open('./hydraview/hydrants.json', 'r') as file:
+    for line in file:
+        string += line
+hydrants = build_list(string)
+
 
 
 @app.route("/test")
@@ -30,4 +40,4 @@ def index(path):
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8000, debug=True)
+    app.run(host='0.0.0.0', port=80, debug=True)
