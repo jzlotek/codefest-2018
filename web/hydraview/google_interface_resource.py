@@ -20,11 +20,9 @@ def get_gps_location(path):
     for res in j.get('results'):
         coords.append(res.get('geometry').get('location'))
 
-    print(coords)
-
     points = []
     for c in coords:
-        points.append(Point(c.get('lng'), c.get('lat'), False, False, None))
+        points.append(Point(c.get('lat'), c.get('lng'), False, False, None))
 
     return points
 

@@ -35,7 +35,7 @@ class Point(Serializable):
         self.CriticalNotes = str(CriticalNotes)
 
     def __str__(self):
-        return "({}, {})".format(self.lng, self.lat)
+        return "({}, {})".format(self.lng, self.lat, self.OutOfService,self.Critical,self.)
 
     def __eq__(self, other):
         return self.lat == other.lat and self.lng == other.lng and self.OutOfService == other.OutOfService and self.Critical == other.Critical and self.CriticalNotes == other.CriticalNotes
