@@ -51,7 +51,7 @@
 
   function getLocations() {
 
-    $.getJSON("http://localhost/getAllHydrants", function(json) {
+    $.getJSON("http://ec2-52-207-219-213.compute-1.amazonaws.com/getAllHydrants", function(json) {
 
       $.each(json, function(i, item) {
         var location = {
