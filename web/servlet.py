@@ -46,7 +46,7 @@ def get():
     if request.args.get('address'):
         ret = hydraview.google_interface_resource.get_gps_location(request.args.get('address'))
 
-        if len(ret) == 0:
+        if ret is None or len(ret) == 0:
             return bytes('null', encoding='UTF-8')
 
         s = ret[0]
