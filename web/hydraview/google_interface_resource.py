@@ -1,6 +1,6 @@
 import requests
 import json
-from quadtree import Point
+from hydraview.quadtree import Point
 
 config = json.load(open("./api.json", 'r'))
 

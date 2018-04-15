@@ -1,4 +1,4 @@
-from quadtree import QuadTree, Point, calculate_boundaries
+from hydraview.quadtree import QuadTree, Point, calculate_boundaries
 import json
 
 

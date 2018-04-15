@@ -50,7 +50,7 @@ def get():
         else:
             closest = get_closest_to_point(hydrants, s)
 
-        json_str = '{"address":' + str(s) + ',"hydrants:"' + jsonify(closest) + '}'
+        json_str = '{"address":' + s.toJSON() + ',"hydrants":' + jsonify(closest) + '}'
 
         return bytes(json_str, encoding='UTF-8')
     else:
