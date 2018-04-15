@@ -48,13 +48,13 @@ With this data set we want to provide first responders with an application that 
 
 ### Our Approach
 
-Out web application currently takes the given data set which persists of ~2500 fire hydrants in the NJ area. The user is asked for the address of the fire when an address is inputted into our API, we make HTTP GET calls to our Flask server with the address of the fire as a query parameter. We return the address's decimal degree coordinates and a list of the closest, n fire hydrants to that address (another query parameter).
+Our web application currently takes the given data set which persists of ~2500 fire hydrants in the NJ area. The user is asked for the address of the fire when an address is inputted into our API, we make HTTP GET calls to our Flask server with the address of the fire as a query parameter. We return the address's decimal degree coordinates and a list of the closest, n fire hydrants to that address (another query parameter).
 
 An example query:
-http://url.com/getClosestHydrants?address=Address&num=X
+http://ec2-52-207-219-213.compute-1.amazonaws.com/getClosestHydrants?address=Address&num=X
 Address is the address, X is the number of hydrants to find
 
-A map will then be displayed for the user with fire hydrant pins that user can select. 
+A map will then be displayed for the user with fire hydrant pins that user can select.
 
 Future improvements include implementing a quad tree as a way of storing data. This would allow the application to scale and still have quick lookups regardless of the data size.
 

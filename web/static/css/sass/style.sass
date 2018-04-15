@@ -18,10 +18,7 @@
 
 html
   font-family: "Roboto", sans-serif
-  // overflow: hidden
-
-// .header
-//   background-color: $header
+  overflow-x: hidden
 
 .header h1
   background-color: $header
@@ -37,8 +34,10 @@ html
   border-radius: 50px
 
 .pageWrapper
-  border-style: solid
   height: 100vh
+
+.aboutWrapper
+  height: 80vh
 
 .help
   height: 100px
@@ -50,13 +49,14 @@ html
   position: relative
   margin: auto
 
-form
-  box-sizing: border-box
-  width: 260px
-  margin: 100px auto 0
+.form
+  position: relative
+  width: 80vw
+  margin: 0 auto
   box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.2)
   padding-bottom: 20px
   border-radius: 3px
+  align-items: center
 
 h1
   box-sizing: border-box
@@ -65,16 +65,16 @@ h1
   text-align: center
 
 input
-  margin: 40px 25px
-  width: 200px
+  margin: 0 auto
+  width: 40vw
   display: block
   border: none
   padding: 10px 0
   border-bottom: solid 1px $header
   transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1)
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, $header 4%)
-  background-position: (-200px) 0
-  background-size: 200px 100%
+  background-position: (-40vw) 0
+  background-size: 40vw 100%
   background-repeat: no-repeat
   color: darken($header, 20%)
 
@@ -99,12 +99,29 @@ button
   color: white
   margin-left: 25px
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2)
+
   // text-align: center
   align-items: center
 
   &:hover
     transform: translateY(-3px)
     box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2)
+
+.again
+  width: 40%
+  height: 42px
+  border-radius: 50px
+  background: $header
+  white-space: nowrap
+  padding: 13px
+  color: white
+  transition: all 0.2s ease
+  font-family: Roboto, sans-serif
+  text-decoration: none
+  text-align: center
+  box-shadow: 0 5px 6px 0 rgba(0, 0, 0, 0.2)
+  position: relative
+  margin: 0 auto
 
 .follow
   width: 42px
@@ -134,9 +151,10 @@ button
 
 .mapper
   align-items: center
+  margin: 0 auto
 
 #map
-  height: 90%
+  height: 85%
   width: 100%
 
 .footer
@@ -202,6 +220,10 @@ button
     background-repeat: none
     background-size: cover
 
+  .follow
+    width: 134px
+    transform: translateX(-50px)
+
 @media only screen and (min-width: 769px)
   .parallax
     height: 100vh
@@ -212,3 +234,7 @@ button
     background-position: center
     background-repeat: no-repeat
     background-size: cover
+
+  .follow
+    width: 42px
+    // transform: translateX(50px)
