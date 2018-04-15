@@ -8,7 +8,7 @@ app = Flask(__name__, static_url_path='')
 hydrants = []
 
 string = ""
-with open('./hydraview/hydrants.json', 'r') as file:
+with open('./hydraview/drexel_json.json', 'r') as file:
     for line in file:
         string += line
 hydrants = build_list(string)
@@ -22,6 +22,11 @@ def jsonify(li):
         else:
             j += str(e.toJSON())
     return j + "]"
+
+
+@app.route("/getAllHydrants")
+def get_all_hydrants():
+    return bytes(jsonify(hydrants), encoding="UTF-8")
 
 
 @app.route("/getOutOfService")
